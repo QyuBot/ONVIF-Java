@@ -162,6 +162,43 @@ onvifManager.setPreset(device, mediaProfiles.get(0), "presetNameABC", "2", (onvi
 onvifManager.removePreset(device, mediaProfiles.get(0), "2");
 ```
 
+
+## Event Message Subscription
+---
+
+getCreatePullPointSubscription / getPullMessages 
+
+```java
+
+String topicExpression = "tns1:RuleEngine/CellMotionDetector//.";
+String initialTerminationTime = "PT1M";
+StringBuilder subscriptionUrl =new StringBuilder();
+onvifManager.getCreatePullPointSubscription(device, new CreatePullPointSubscriptionListener() {
+    @Override
+    public void onCreatePullPointSubscriptionResponseReceived(OnvifDevice device, CreatePullPointSubscription createPullPointSubscriptionResponse) {
+        System.out.println("onPullMessagesResponseReceived : " + device + "-" + createPullPointSubscriptionResponse);  
+        subscriptionUrl.delete(0, 100000);
+        subscriptionUrl.append(createPullPointSubscriptionResponse.address);
+    }
+}, topicExpression, initialTerminationTime);
+
+......
+
+String messageLimit = "1";
+String timeout = "PT5M";
+StringBuffer resultMessage =new StringBuffer();
+onvifManager.getPullMessages(device, new PullMessagesListener() {
+    @Override
+    public void onPullMessagesResponseReceived(OnvifDevice device, PullMessages pullMessageResponse) {
+        System.out.println("onPullMessagesResponseReceived : {} - {}" +device + "-" + pullMessageResponse);
+        resultMessage.append("Success");
+    }
+},  subscriptionUrl.toString(), messageLimit, timeout);
+    
+```
+
+
+
 ## Custom Requests
 ---
 
