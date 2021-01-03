@@ -92,6 +92,18 @@ public class OnvifManager implements OnvifResponseListener {
         executor.sendRequest(device, request);
     }
 
+
+    public void getCreatePullPointSubscription(OnvifDevice device, CreatePullPointSubscriptionListener listener,
+                                               String topicExpression, String initialTerminationTime ) {
+        OnvifRequest request = new CreatePullSubscriptionRequest(listener, topicExpression, initialTerminationTime);
+        executor.sendRequest(device, request);
+    }
+
+    public void getPullMessages(OnvifDevice device, PullMessagesListener listener, String subscriptionUrl, String messageLimit, String timeout ) {
+        OnvifRequest request = new PullMessagesRequest(listener, subscriptionUrl, messageLimit, timeout);
+        executor.sendRequest(device, request);
+    }
+
     public void sendOnvifRequest(OnvifDevice device, OnvifRequest request) {
         executor.sendRequest(device, request);
     }

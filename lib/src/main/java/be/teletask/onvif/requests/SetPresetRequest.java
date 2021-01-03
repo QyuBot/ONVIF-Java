@@ -69,4 +69,9 @@ public class SetPresetRequest implements OnvifRequest {
         return OnvifType.SET_PRESET;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

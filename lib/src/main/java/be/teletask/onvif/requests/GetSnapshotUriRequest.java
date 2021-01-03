@@ -40,4 +40,9 @@ public class GetSnapshotUriRequest implements OnvifRequest {
         return OnvifType.GET_SNAPSHOT_URI;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

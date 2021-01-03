@@ -2,12 +2,14 @@ package be.teletask.onvif.requests;
 
 import be.teletask.onvif.listeners.OnvifDeviceInformationListener;
 import be.teletask.onvif.models.OnvifType;
+import lombok.Data;
 
 
 /**
  * Created by Tomas Verhelst on 04/09/2018.
  * Copyright (c) 2018 TELETASK BVBA. All rights reserved.
  */
+@Data
 public class GetDeviceInformationRequest implements OnvifRequest {
 
     //Constants
@@ -36,6 +38,11 @@ public class GetDeviceInformationRequest implements OnvifRequest {
     @Override
     public OnvifType getType() {
         return OnvifType.GET_DEVICE_INFORMATION;
+    }
+
+    @Override
+    public String getAddHeader() {
+        return null;
     }
 
 }

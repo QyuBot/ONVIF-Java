@@ -50,4 +50,9 @@ public class GotoPresetRequest implements OnvifRequest {
         return OnvifType.GOTO_PRESET;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

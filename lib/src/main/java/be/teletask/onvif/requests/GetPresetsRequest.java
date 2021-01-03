@@ -40,4 +40,9 @@ public class GetPresetsRequest implements OnvifRequest {
         return OnvifType.GET_PRESETS;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

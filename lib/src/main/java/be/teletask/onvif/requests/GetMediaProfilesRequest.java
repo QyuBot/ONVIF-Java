@@ -38,4 +38,9 @@ public class GetMediaProfilesRequest implements OnvifRequest {
         return OnvifType.GET_MEDIA_PROFILES;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

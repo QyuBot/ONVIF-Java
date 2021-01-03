@@ -42,4 +42,9 @@ public class RemovePresetRequest implements OnvifRequest {
         return OnvifType.REMOVE_PRESET;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

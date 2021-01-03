@@ -40,4 +40,9 @@ public class GetStatusRequest implements OnvifRequest {
         return OnvifType.GET_STATUS;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

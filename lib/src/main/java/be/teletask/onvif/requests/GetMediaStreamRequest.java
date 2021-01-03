@@ -51,4 +51,9 @@ public class GetMediaStreamRequest implements OnvifRequest {
         return OnvifType.GET_STREAM_URI;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

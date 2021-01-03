@@ -55,4 +55,9 @@ public class AbsoluteMoveRequest implements OnvifRequest {
         return OnvifType.ABSOLUTE_MOVE;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

@@ -40,4 +40,9 @@ public class GetServicesRequest implements OnvifRequest {
         return OnvifType.GET_SERVICES;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

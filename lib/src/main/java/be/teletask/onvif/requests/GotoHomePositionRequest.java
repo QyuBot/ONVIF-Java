@@ -46,4 +46,9 @@ public class GotoHomePositionRequest implements OnvifRequest {
         return OnvifType.GOTO_HOME_POSITION;
     }
 
+    @Override
+    public String getAddHeader() {
+        return null;
+    }
+
 }

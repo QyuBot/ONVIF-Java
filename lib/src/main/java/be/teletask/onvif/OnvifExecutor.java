@@ -66,7 +66,7 @@ public class OnvifExecutor {
     void sendRequest(OnvifDevice device, OnvifRequest request) {
         credentials.setUserName(device.getUsername());
         credentials.setPassword(device.getPassword());
-        reqBody = RequestBody.create(OnvifXMLBuilder.getSoapHeader() + request.getXml() + OnvifXMLBuilder.getEnvelopeEnd(), reqBodyType);
+        reqBody = RequestBody.create(OnvifXMLBuilder.getSoapHeader(request) + request.getXml() + OnvifXMLBuilder.getEnvelopeEnd(), reqBodyType);
         performXmlRequest(device, request, buildOnvifRequest(device, request));
     }
 
@@ -158,6 +158,14 @@ public class OnvifExecutor {
                 setPresetRequest.getListener().onPresetReceived(device, setPresetRequest.getMediaProfile(),
                         new SetPresetParser().parse(response));
                 break;
+            case CREATE_FULL_POINT_SUBSCRIPTION:
+                ((CreatePullSubscriptionRequest) response.request()).getListener().onCreatePullPointSubscriptionResponseReceived(device,
+                        new CreatePullPointSubscriptionParser().parse(response));
+                 break;
+            case PULL_MESSAGE:
+                ((PullMessagesRequest) response.request()).getListener().onPullMessagesResponseReceived(device,
+                        new PullMessagesParser().parse(response));
+                break;
             default:
                 onvifResponseListener.onResponse(device, response);
                 break;
@@ -184,6 +192,10 @@ public class OnvifExecutor {
                 return device.getPath().getProfilesPath();
             case GET_STREAM_URI:
                 return device.getPath().getStreamURIPath();
+            case CREATE_FULL_POINT_SUBSCRIPTION:
+                return device.getPath().getEventServicePath();
+            case PULL_MESSAGE:
+                return device.getPath().getEventServicePath();
             default:
                 return device.getPath().getServicesPath();
         }

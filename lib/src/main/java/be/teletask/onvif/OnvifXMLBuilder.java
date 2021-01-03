@@ -1,5 +1,7 @@
 package be.teletask.onvif;
 
+import be.teletask.onvif.requests.OnvifRequest;
+
 /**
  * Created by Tomas Verhelst on 03/09/2018.
  * Copyright (c) 2018 TELETASK BVBA. All rights reserved.
@@ -19,10 +21,24 @@ public class OnvifXMLBuilder {
                 "xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" >" +
                 "<soap:Body>";
     }
+    public static String getSoapHeader(OnvifRequest request) {
+        String addHeader = request.getAddHeader();
+        return "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
+                "<soap:Envelope " +
+                "xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" " +
+                "xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\" " +
+                "xmlns:soap=\"http://www.w3.org/2003/05/soap-envelope\" >" +
+                (addHeader != null && addHeader.length() > 0 ?
+                "<soap:Header>" + addHeader + "</soap:Header>"
+                :"") +
+                "<soap:Body>"
+                ;
+    }
 
     public static String getEnvelopeEnd() {
         return "</soap:Body></soap:Envelope>";
     }
+
 
     public static String getDiscoverySoapHeader() {
         return "<?xml version=\"1.0\" encoding=\"utf-8\"?>" +
