@@ -5,7 +5,7 @@ plugins {
 //    id "com.github.dcendents.android-maven" version "2.1"
 //    id "com.jfrog.bintray" version "1.8.5"
     id 'io.freefair.lombok' version '5.1.1'
-
+    id 'maven-publish'
 }
 
 group 'com.github.03'
@@ -56,7 +56,7 @@ ext {
     siteUrl = 'https://github.com/RootSoft/ONVIF-Java'
     gitUrl = 'https://github.com/RootSoft/ONVIF-Java.git'
 
-    libraryVersion = '1.0.7'
+    libraryVersion = '1.0.7-f2'
 
     developerId = 'tomasverhelst'
     developerName = 'Tomas Verhelst'
@@ -117,4 +117,17 @@ nexus {
 nexusStaging {
 //    packageGroup = "com.github.03" //optional if packageGroup == project.getGroup()
     stagingProfileId = "166964289967b" //when not defined will be got from server using "packageGroup"
+}
+
+afterEvaluate {
+    publishing {
+        publications {
+            release(MavenPublication) {
+                from components.release
+                groupId = project.ext.publishedGroupId
+                artifactId = project.ext.artifact
+                version = project.ext.libraryVersion
+            }
+        }
+    }
 }
