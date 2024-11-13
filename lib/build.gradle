@@ -1,14 +1,10 @@
 plugins {
     id 'java'
-    id "com.bmuschko.nexus" version "2.3.1" // Gradle Sonatype Nexux Plugin
-    id "io.codearte.nexus-staging" version "0.21.2" // Gradle Nexus Staging Plugin
-//    id "com.github.dcendents.android-maven" version "2.1"
-//    id "com.jfrog.bintray" version "1.8.5"
     id 'io.freefair.lombok' version '5.1.1'
     id 'maven-publish'
 }
 
-group 'com.github.03'
+group 'com.github.QyuBot'
 version '1.0.0'
 
 sourceCompatibility = 1.8
@@ -23,20 +19,20 @@ if (JavaVersion.current().isJava8Compatible()) {
 
 repositories {
     mavenCentral()
-    jcenter()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.13'
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation group: 'junit', name: 'junit', version: '4.13'
 
     //Annotations
-    compile group: 'org.jetbrains', name: 'annotations', version: '19.0.0'
+    implementation group: 'org.jetbrains', name: 'annotations', version: '19.0.0'
 
     //XML parser
-    compile group: 'net.sf.kxml', name: 'kxml2', version: '2.3.0'
+    implementation group: 'net.sf.kxml', name: 'kxml2', version: '2.3.0'
 
     //OkHttp
-    compile 'com.squareup.okhttp3:okhttp:4.8.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.8.0'
 
     //OkHttp Digest
     implementation 'io.github.rburgst:okhttp-digest:2.7'
@@ -71,59 +67,9 @@ group = publishedGroupId
 version = libraryVersion
 archivesBaseName = 'onvif'
 
-modifyPom {
-    project {
-        name 'ONVIF Camera'
-        description 'A Java library to discover, control and manage ONVIF-supported PTZ Cameras'
-        url 'https://github.com/03/ONVIF-Java'
-        inceptionYear '2020'
-
-        scm {
-            url 'https://github.com/03/ONVIF-Java'
-            connection 'scm:https://github.com/03/ONVIF-Java.git'
-            developerConnection 'scm:git://github.com/03/ONVIF-Java.git'
-        }
-
-        licenses {
-            license {
-                name 'The Apache Software License, Version 2.0'
-                url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
-                distribution 'repo'
-            }
-        }
-
-        developers {
-            developer {
-                id 'ozcat'
-                name 'Luke Feng'
-                email 'windboxx@gmail.com'
-            }
-        }
-    }
-}
-
-extraArchive {
-    sources = true
-    tests = true
-    javadoc = true
-}
-
-nexus {
-    sign = true
-    repositoryUrl = 'https://oss.sonatype.org/service/local/staging/deploy/maven2/'
-    snapshotRepositoryUrl = 'https://oss.sonatype.org/content/repositories/snapshots/'
-}
-
-nexusStaging {
-//    packageGroup = "com.github.03" //optional if packageGroup == project.getGroup()
-    stagingProfileId = "166964289967b" //when not defined will be got from server using "packageGroup"
-}
-
 publishing {
     publications {
         release(MavenPublication) {
-            groupId = "com.github.QyuBot"
-            artifactId = project.ext.artifact
             version = project.ext.libraryVersion
             from components.java
         }
@@ -131,6 +77,6 @@ publishing {
 }
 
 wrapper {
-    gradleVersion = "6.7"
+    gradleVersion = "6.5.1"
     distributionType = Wrapper.DistributionType.ALL
 }
