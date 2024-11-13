@@ -39,7 +39,7 @@ dependencies {
     compile 'com.squareup.okhttp3:okhttp:4.8.0'
 
     //OkHttp Digest
-    compile 'com.burgstaller:okhttp-digest:2.1'
+    implementation 'io.github.rburgst:okhttp-digest:2.7'
 
 }
 
