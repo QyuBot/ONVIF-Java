@@ -119,14 +119,13 @@ nexusStaging {
     stagingProfileId = "166964289967b" //when not defined will be got from server using "packageGroup"
 }
 
-afterEvaluate {
-    publishing {
-        publications {
-            release(MavenPublication) {
-                groupId = project.ext.publishedGroupId
-                artifactId = project.ext.artifact
-                version = project.ext.libraryVersion
-            }
+publishing {
+    publications {
+        release(MavenPublication) {
+            groupId = "com.github.QyuBot"
+            artifactId = project.ext.artifact
+            version = project.ext.libraryVersion
+            from components.java
         }
     }
 }
